@@ -54,7 +54,7 @@ cd mojo-matrix-multiply
 - Run with:
 
 ```bash
-mojo src/main.mojo
+magic run mojo src/main.mojo
 ```
 
 (after setup)
@@ -68,6 +68,16 @@ mojo src/main.mojo
 ## License
 
 MIT License
+
+## Running the Matrix Calculator
+
+To execute the program, use:
+
+```bash
+magic run mojo src/main.mojo
+```
+
+This will run all the matrix operation tests and print results to the console.
 
 ## Project Findings
 
