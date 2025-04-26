@@ -29,6 +29,34 @@ def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
         result.append(row)
     return result
 
+def matrix_multiply(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
+    if len(a) == 0 or len(b) == 0:
+        print("Error: One or both matrices are empty!")
+        return List[List[Int]]()
+    if len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B!")
+        return List[List[Int]]()
+    # Check all rows in a have same length
+    for i in range(len(a)):
+        if len(a[i]) != len(a[0]):
+            print("Error: Matrix A has inconsistent row lengths!")
+            return List[List[Int]]()
+    # Check all rows in b have same length
+    for i in range(len(b)):
+        if len(b[i]) != len(b[0]):
+            print("Error: Matrix B has inconsistent row lengths!")
+            return List[List[Int]]()
+    result = List[List[Int]]()
+    for i in range(len(a)):
+        row = List[Int]()
+        for j in range(len(b[0])):
+            s = 0
+            for k in range(len(a[0])):
+                s += a[i][k] * b[k][j]
+            row.append(s)
+        result.append(row)
+    return result
+
 def main():
     l = List(2, 3, 5)
     l.append(7)
@@ -44,6 +72,9 @@ def main():
     result_add = matrix_add(a, b)
     if len(result_add) > 0:
         print_matrix(result_add, "Result (A+B):")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(result_mul, "Result (A*B):")
 
     # Test 2: Non-square matrices
     a = List(
@@ -61,21 +92,8 @@ def main():
         print_matrix(a, "Matrix A:")
         print_matrix(b, "Matrix B:")
         print_matrix(result_add, "Result (A+B):")
-    # Multiplication shape check
-    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
-        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
-        print("Aborting matrix multiplication.")
-    else:
-        result_mul = List(
-            List(0, 0),
-            List(0, 0)
-        )
-        for i in range(len(a)):
-            for j in range(len(b[0])):
-                s = 0
-                for k in range(len(a[0])):
-                    s += a[i][k] * b[k][j]
-                result_mul[i][j] = s
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
         print_matrix(result_mul, "Result (A*B):")
 
     # Original test: 2x2 matrices
@@ -93,21 +111,8 @@ def main():
         print_matrix(a, "Matrix A:")
         print_matrix(b, "Matrix B:")
         print_matrix(result_add, "Result (A+B):")
-    # Matrix multiplication with error check
-    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
-        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
-        print("Aborting matrix multiplication.")
-    else:
-        result_mul = List(
-            List(0, 0),
-            List(0, 0)
-        )
-        for i in range(len(a)):
-            for j in range(len(b[0])):
-                s = 0
-                for k in range(len(a[0])):
-                    s += a[i][k] * b[k][j]
-                result_mul[i][j] = s
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
         print_matrix(result_mul, "Result (A*B):")
 
     # Original test with shape mismatch
@@ -125,18 +130,6 @@ def main():
         print_matrix(a, "Matrix A:")
         print_matrix(b, "Matrix B:")
         print_matrix(result_add, "Result (A+B):")
-    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
-        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
-        print("Aborting matrix multiplication.")
-    else:
-        result_mul = List(
-            List(0, 0),
-            List(0, 0)
-        )
-        for i in range(len(a)):
-            for j in range(len(b[0])):
-                s = 0
-                for k in range(len(a[0])):
-                    s += a[i][k] * b[k][j]
-                result_mul[i][j] = s
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
         print_matrix(result_mul, "Result (A*B):")

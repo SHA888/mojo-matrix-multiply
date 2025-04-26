@@ -82,4 +82,44 @@ def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
 
 ---
 
-_Last updated: 2025-04-26 22:20 (UTC+8)_
+## 9. Modularizing Matrix Multiplication
+
+- Refactored the matrix multiplication logic into a standalone function:
+
+```python
+def matrix_multiply(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
+    if len(a) == 0 or len(b) == 0:
+        print("Error: One or both matrices are empty!")
+        return List[List[Int]]()
+    if len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B!")
+        return List[List[Int]]()
+    # Check all rows in a have same length
+    for i in range(len(a)):
+        if len(a[i]) != len(a[0]):
+            print("Error: Matrix A has inconsistent row lengths!")
+            return List[List[Int]]()
+    # Check all rows in b have same length
+    for i in range(len(b)):
+        if len(b[i]) != len(b[0]):
+            print("Error: Matrix B has inconsistent row lengths!")
+            return List[List[Int]]()
+    result = List[List[Int]]()
+    for i in range(len(a)):
+        row = List[Int]()
+        for j in range(len(b[0])):
+            s = 0
+            for k in range(len(a[0])):
+                s += a[i][k] * b[k][j]
+            row.append(s)
+        result.append(row)
+    return result
+```
+- All multiplication operations in `main()` now use this function.
+- Error handling is robust: empty matrices, dimension mismatches, and inconsistent row lengths are all checked and reported.
+- Results are only printed if the returned matrix is non-empty.
+- This step further improves code clarity, reusability, and maintainability.
+
+---
+
+_Last updated: 2025-04-26 22:30 (UTC+8)_
