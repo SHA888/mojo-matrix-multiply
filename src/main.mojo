@@ -17,6 +17,18 @@ def check_matrix_shape(a: List[List[Int]], b: List[List[Int]]) -> Bool:
             return False
     return True
 
+def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
+    if not check_matrix_shape(a, b):
+        print("Aborting matrix addition due to shape mismatch.")
+        return List[List[Int]]()
+    result = List[List[Int]]()
+    for i in range(len(a)):
+        row = List[Int]()
+        for j in range(len(a[i])):
+            row.append(a[i][j] + b[i][j])
+        result.append(row)
+    return result
+
 def main():
     l = List(2, 3, 5)
     l.append(7)
@@ -25,6 +37,48 @@ def main():
     for idx in range(len(l)):
         print(l[idx])
 
+    # Test 1: Empty matrices
+    a = List[List[Int]]()
+    b = List[List[Int]]()
+    print("\nTest 1: Empty matrices")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(result_add, "Result (A+B):")
+
+    # Test 2: Non-square matrices
+    a = List(
+        List(1, 2, 3),
+        List(4, 5, 6)
+    )
+    b = List(
+        List(7, 8),
+        List(9, 10),
+        List(11, 12)
+    )
+    print("\nTest 2: Non-square matrices")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    # Multiplication shape check
+    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
+        print("Aborting matrix multiplication.")
+    else:
+        result_mul = List(
+            List(0, 0),
+            List(0, 0)
+        )
+        for i in range(len(a)):
+            for j in range(len(b[0])):
+                s = 0
+                for k in range(len(a[0])):
+                    s += a[i][k] * b[k][j]
+                result_mul[i][j] = s
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Original test: 2x2 matrices
     a = List(
         List(1, 2),
         List(3, 4)
@@ -33,35 +87,56 @@ def main():
         List(5, 6),
         List(7, 8)
     )
-    # Matrix addition with error check
-    if not check_matrix_shape(a, b):
-        print("Aborting matrix addition due to shape mismatch.")
-        return
-    result_add = List(
-        List(0, 0),
-        List(0, 0)
-    )
-    for i in range(len(a)):
-        for j in range(len(a[i])):
-            result_add[i][j] = a[i][j] + b[i][j]
-
+    print("\nOriginal test: 2x2 matrices")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
     # Matrix multiplication with error check
-    if len(a[0]) != len(b):
-        print("Error: Number of columns of A does not match number of rows of B!")
+    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
         print("Aborting matrix multiplication.")
-        return
-    result_mul = List(
-        List(0, 0),
-        List(0, 0)
-    )
-    for i in range(len(a)):
-        for j in range(len(b[0])):
-            s = 0
-            for k in range(len(a[0])):
-                s += a[i][k] * b[k][j]
-            result_mul[i][j] = s
+    else:
+        result_mul = List(
+            List(0, 0),
+            List(0, 0)
+        )
+        for i in range(len(a)):
+            for j in range(len(b[0])):
+                s = 0
+                for k in range(len(a[0])):
+                    s += a[i][k] * b[k][j]
+                result_mul[i][j] = s
+        print_matrix(result_mul, "Result (A*B):")
 
-    print_matrix(a, "Matrix A:")
-    print_matrix(b, "Matrix B:")
-    print_matrix(result_add, "Result (A+B):")
-    print_matrix(result_mul, "Result (A*B):")
+    # Original test with shape mismatch
+    a = List(
+        List(1, 2),
+        List(3, 4)
+    )
+    b = List(
+        List(5, 6, 9),  # Different length row!
+        List(7, 8)
+    )
+    print("\nOriginal test: shape mismatch")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    if len(a) == 0 or len(b) == 0 or len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B, or matrix is empty!")
+        print("Aborting matrix multiplication.")
+    else:
+        result_mul = List(
+            List(0, 0),
+            List(0, 0)
+        )
+        for i in range(len(a)):
+            for j in range(len(b[0])):
+                s = 0
+                for k in range(len(a[0])):
+                    s += a[i][k] * b[k][j]
+                result_mul[i][j] = s
+        print_matrix(result_mul, "Result (A*B):")

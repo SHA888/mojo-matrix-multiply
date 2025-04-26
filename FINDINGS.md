@@ -58,4 +58,28 @@ This document summarizes our incremental exploration of Mojo's language features
 
 ---
 
-_Last updated: 2025-04-26 22:11 (UTC+8)_
+## 8. Modularizing Matrix Addition
+
+- Refactored the element-wise matrix addition logic into a standalone function:
+
+```python
+def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
+    if not check_matrix_shape(a, b):
+        print("Aborting matrix addition due to shape mismatch.")
+        return List[List[Int]]()
+    result = List[List[Int]]()
+    for i in range(len(a)):
+        row = List[Int]()
+        for j in range(len(a[i])):
+            row.append(a[i][j] + b[i][j])
+        result.append(row)
+    return result
+```
+- All addition operations in `main()` now use this function.
+- Error handling is preserved: if the shapes don’t match, the function prints an error and returns an empty matrix.
+- In `main()`, results are only printed if the returned matrix is non-empty.
+- This step improves code clarity, reusability, and maintainability.
+
+---
+
+_Last updated: 2025-04-26 22:20 (UTC+8)_
