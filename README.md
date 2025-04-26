@@ -68,3 +68,7 @@ mojo src/main.mojo
 ## License
 
 MIT License
+
+## Project Findings
+
+See the full incremental exploration and bug-hunting log in [FINDINGS.md](./FINDINGS.md).
