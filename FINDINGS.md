@@ -162,4 +162,57 @@ def check_matrix_shape_multiplicable(a: List[List[Int]], b: List[List[Int]]) -> 
 
 ---
 
-_Last updated: 2025-04-26 22:35 (UTC+8)_
+## 11. Edge Case and Stress Testing
+
+- Added a comprehensive set of new tests in `main()` to cover:
+  - **1x1 matrices (scalar):** Confirmed that addition and multiplication work for single-element matrices.
+  - **1xN and Nx1 matrices (row/column vectors):** Matrix multiplication produces correct results for row/column vectors.
+  - **Matrices with zeros and negatives:** Both operations handle zero and negative values as expected.
+  - **Large matrices (3x3):** Addition and multiplication work for larger matrices, and results are correct.
+  - **Inconsistent row matrices:** Both addition and multiplication correctly detect and abort on matrices with inconsistent row lengths, with clear error messages.
+- All previous tests (empty, non-square, shape mismatch, 2x2) continue to pass and/or trigger appropriate errors.
+- **Findings:**
+  - Mojo's strict type and shape checking, together with modularized validation, reliably prevents invalid operations.
+  - The calculator now robustly handles a wide variety of edge cases.
+  - Error messages are clear and centralized.
+
+**Sample Output:**
+```
+Test 5: 1x1 matrices (scalar)
+Matrix A:
+42 
+Matrix B:
+-7 
+Result (A+B):
+35 
+Result (A*B):
+-294 
+
+Test 6: 1xN and Nx1 matrices (row/column vectors)
+Matrix A:
+1 2 3 
+Matrix B:
+4 
+5 
+6 
+Result (A*B):
+32 
+
+Test 7: Matrices with zeros and negatives
+Matrix A:
+0 -1 
+-2 0 
+Matrix B:
+-3 0 
+0 4 
+Result (A+B):
+-3 -1 
+-2 4 
+Result (A*B):
+0 -4 
+6 0 
+```
+
+---
+
+_Last updated: 2025-04-26 22:41 (UTC+8)_

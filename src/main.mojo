@@ -102,7 +102,7 @@ def main():
     if len(result_mul) > 0:
         print_matrix(result_mul, "Result (A*B):")
 
-    # Original test: 2x2 matrices
+    # Test 3: 2x2 matrices
     a = List(
         List(1, 2),
         List(3, 4)
@@ -111,7 +111,7 @@ def main():
         List(5, 6),
         List(7, 8)
     )
-    print("\nOriginal test: 2x2 matrices")
+    print("\nTest 3: 2x2 matrices")
     result_add = matrix_add(a, b)
     if len(result_add) > 0:
         print_matrix(a, "Matrix A:")
@@ -121,7 +121,7 @@ def main():
     if len(result_mul) > 0:
         print_matrix(result_mul, "Result (A*B):")
 
-    # Original test with shape mismatch
+    # Test 4: Shape mismatch
     a = List(
         List(1, 2),
         List(3, 4)
@@ -130,7 +130,99 @@ def main():
         List(5, 6, 9),  # Different length row!
         List(7, 8)
     )
-    print("\nOriginal test: shape mismatch")
+    print("\nTest 4: shape mismatch")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Test 5: 1x1 matrices (scalar)
+    a = List(
+        List(42)
+    )
+    b = List(
+        List(-7)
+    )
+    print("\nTest 5: 1x1 matrices (scalar)")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Test 6: 1xN and Nx1 matrices (row/column vectors)
+    a = List(
+        List(1, 2, 3)
+    )
+    b = List(
+        List(4),
+        List(5),
+        List(6)
+    )
+    print("\nTest 6: 1xN and Nx1 matrices (row/column vectors)")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Test 7: Matrices with zeros and negatives
+    a = List(
+        List(0, -1),
+        List(-2, 0)
+    )
+    b = List(
+        List(-3, 0),
+        List(0, 4)
+    )
+    print("\nTest 7: Matrices with zeros and negatives")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Test 8: Large matrices (3x3)
+    a = List(
+        List(1, 2, 3),
+        List(4, 5, 6),
+        List(7, 8, 9)
+    )
+    b = List(
+        List(9, 8, 7),
+        List(6, 5, 4),
+        List(3, 2, 1)
+    )
+    print("\nTest 8: Large 3x3 matrices")
+    result_add = matrix_add(a, b)
+    if len(result_add) > 0:
+        print_matrix(a, "Matrix A:")
+        print_matrix(b, "Matrix B:")
+        print_matrix(result_add, "Result (A+B):")
+    result_mul = matrix_multiply(a, b)
+    if len(result_mul) > 0:
+        print_matrix(result_mul, "Result (A*B):")
+
+    # Test 9: Inconsistent row matrices
+    a = List(
+        List(1, 2),
+        List(3, 4, 5)
+    )
+    b = List(
+        List(6, 7),
+        List(8, 9)
+    )
+    print("\nTest 9: Inconsistent row matrices")
     result_add = matrix_add(a, b)
     if len(result_add) > 0:
         print_matrix(a, "Matrix A:")
