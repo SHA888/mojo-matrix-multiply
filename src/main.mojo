@@ -63,7 +63,63 @@ def matrix_multiply(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
         result.append(row)
     return result
 
+def read_matrix(name: String) -> List[List[Int]]:
+    print("Enter number of rows for", name, ":", end=" ")
+    n_rows = int(input())
+    print("Enter number of columns for", name, ":", end=" ")
+    n_cols = int(input())
+    matrix = List[List[Int]]()
+    for i in range(n_rows):
+        print("Enter row", i, "as", n_cols, "space-separated integers:", end=" ")
+        row_str = input()
+        row_vals = row_str.strip().split()
+        if len(row_vals) != n_cols:
+            print("Error: Row", i, "does not have", n_cols, "values!")
+            return List[List[Int]]()
+        row = List[Int]()
+        for val in row_vals:
+            try:
+                row.append(int(val))
+            except:
+                print("Error: Non-integer value in row", i)
+                return List[List[Int]]()
+        matrix.append(row)
+    return matrix
+
+def interactive_mode():
+    print("Matrix Calculator Interactive Mode\nChoose operation:")
+    print("1. Addition (A+B)")
+    print("2. Multiplication (A*B)")
+    print("Enter 1 or 2:", end=" ")
+    op = input().strip()
+    if op not in ["1", "2"]:
+        print("Invalid operation. Exiting interactive mode.")
+        return
+    a = read_matrix("Matrix A")
+    b = read_matrix("Matrix B")
+    if len(a) == 0 or len(b) == 0:
+        print("One or both matrices invalid. Exiting interactive mode.")
+        return
+    if op == "1":
+        result = matrix_add(a, b)
+        if len(result) > 0:
+            print_matrix(a, "Matrix A:")
+            print_matrix(b, "Matrix B:")
+            print_matrix(result, "Result (A+B):")
+    else:
+        result = matrix_multiply(a, b)
+        if len(result) > 0:
+            print_matrix(a, "Matrix A:")
+            print_matrix(b, "Matrix B:")
+            print_matrix(result, "Result (A*B):")
+
 def main():
+    print("Do you want to enter matrices interactively? (y/n):", end=" ")
+    ans = input().strip().lower()
+    if ans == "y":
+        interactive_mode()
+        return
+
     l = List(2, 3, 5)
     l.append(7)
     l.append(11)

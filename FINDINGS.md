@@ -215,4 +215,19 @@ Result (A*B):
 
 ---
 
-_Last updated: 2025-04-26 22:41 (UTC+8)_
+## 12. Interactive User Input for Matrices
+
+- Added interactive mode to the matrix calculator:
+  - On startup, user is prompted: `Do you want to enter matrices interactively? (y/n):`
+  - If `y`, user selects operation (addition or multiplication), then enters two matrices by specifying dimensions and entering each row as space-separated integers.
+  - Input is validated for correct shape and integer entries; errors are reported and the operation is aborted if invalid.
+  - Results are printed for valid operations, using the same display as automated tests.
+- If user enters `n`, all previous automated tests are run as before.
+- **Mojo quirks:**
+  - Input parsing requires explicit conversion (`int(input())`), and all error handling is manual (no exceptions).
+  - Input and print statements use comma-separated arguments (no f-strings).
+- This feature demonstrates Mojo's input handling and makes the calculator practical for user-driven scenarios.
+
+---
+
+_Last updated: 2025-04-26 22:46 (UTC+8)_
