@@ -230,4 +230,39 @@ Result (A*B):
 
 ---
 
-_Last updated: 2025-04-26 22:46 (UTC+8)_
+## 13. Matrix Transpose Operation
+
+- Implemented `matrix_transpose(a: List[List[Int]]) -> List[List[Int]]` to return the transpose of a matrix.
+- Handles empty and inconsistent matrices with clear error messages.
+- Added automated tests for:
+  - Square matrices
+  - Non-square matrices
+  - Row and column vectors
+  - Empty matrices
+  - Inconsistent matrices
+- **Limitation:**
+  - Mojo currently does **not** support interactive user input (`input()`, `int()`) or exception handling. All interactive features have been removed/commented out.
+  - Only automated tests are supported at this time.
+- **Sample Output:**
+```
+Test 10: Transpose square matrix
+Matrix A:
+1 2 
+3 4 
+Result (A^T):
+1 3 
+2 4 
+
+Test 11: Transpose non-square matrix
+Matrix A:
+1 2 3 
+4 5 6 
+Result (A^T):
+1 4 
+2 5 
+3 6 
+```
+
+---
+
+_Last updated: 2025-04-27 03:27 (UTC+8)_
