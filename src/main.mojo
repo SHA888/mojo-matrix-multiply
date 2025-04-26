@@ -1,5 +1,22 @@
 from collections import List
 
+def print_matrix(m: List[List[Int]], name: String):
+    print(name)
+    for i in range(len(m)):
+        for j in range(len(m[i])):
+            print(m[i][j], end=" ")
+        print("")
+
+def check_matrix_shape(a: List[List[Int]], b: List[List[Int]]) -> Bool:
+    if len(a) != len(b):
+        print("Error: Matrices have different number of rows!")
+        return False
+    for i in range(len(a)):
+        if len(a[i]) != len(b[i]):
+            print("Error: Row", i, "has different lengths in the two matrices!")
+            return False
+    return True
+
 def main():
     l = List(2, 3, 5)
     l.append(7)
@@ -16,7 +33,10 @@ def main():
         List(5, 6),
         List(7, 8)
     )
-    # Matrix addition
+    # Matrix addition with error check
+    if not check_matrix_shape(a, b):
+        print("Aborting matrix addition due to shape mismatch.")
+        return
     result_add = List(
         List(0, 0),
         List(0, 0)
@@ -25,23 +45,11 @@ def main():
         for j in range(len(a[i])):
             result_add[i][j] = a[i][j] + b[i][j]
 
-    print("Matrix A:")
-    for i in range(len(a)):
-        for j in range(len(a[i])):
-            print(a[i][j], end=" ")
-        print("")
-    print("Matrix B:")
-    for i in range(len(b)):
-        for j in range(len(b[i])):
-            print(b[i][j], end=" ")
-        print("")
-    print("Result (A+B):")
-    for i in range(len(result_add)):
-        for j in range(len(result_add[i])):
-            print(result_add[i][j], end=" ")
-        print("")
-
-    # Matrix multiplication
+    # Matrix multiplication with error check
+    if len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B!")
+        print("Aborting matrix multiplication.")
+        return
     result_mul = List(
         List(0, 0),
         List(0, 0)
@@ -52,8 +60,8 @@ def main():
             for k in range(len(a[0])):
                 s += a[i][k] * b[k][j]
             result_mul[i][j] = s
-    print("Result (A*B):")
-    for i in range(len(result_mul)):
-        for j in range(len(result_mul[i])):
-            print(result_mul[i][j], end=" ")
-        print("")
+
+    print_matrix(a, "Matrix A:")
+    print_matrix(b, "Matrix B:")
+    print_matrix(result_add, "Result (A+B):")
+    print_matrix(result_mul, "Result (A*B):")
