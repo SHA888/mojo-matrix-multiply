@@ -20,9 +20,33 @@ cd mojo-matrix-multiply
 
 ### Install Mojo
 
-- Follow instructions at the official [Mojo GitHub repository](https://github.com/modular/max/tree/main/mojo) to install the nightly Mojo compiler.
-- Use `magic init mojo-nightly --format mojoproject` or install via conda:
-  [https://conda.modular.com/max-nightly/](https://conda.modular.com/max-nightly/)
+- To install the Modular magic CLI (required for Mojo), run:
+
+  ```bash
+  curl -ssL https://magic.modular.com/ | bash
+  # Then add magic to your PATH for this session:
+  source ~/.bashrc
+  # (You may need to restart your terminal or run this command in each new session)
+  ```
+
+- To install the latest released build of Mojo, follow the [Get started with Mojo guide](https://docs.modular.com/mojo/manual/get-started).
+- To use the latest nightly build, after installing the magic CLI, initialize your current directory as a Mojo project:
+
+  ```bash
+  magic init . --format mojoproject -c conda-forge -c https://conda.modular.com/max-nightly
+  ```
+
+  Or, if you prefer conda directly, add the nightly channel to your environment.yaml:
+
+  ```yaml
+  channels:
+    - conda-forge
+    - https://conda.modular.com/max-nightly/
+  dependencies:
+    - max
+  ```
+
+  See the [official instructions](https://github.com/modular/max/tree/main/mojo#installing-mojo) for more details.
 
 ### Run the Program
 
