@@ -7,7 +7,7 @@ def print_matrix(m: List[List[Int]], name: String):
             print(m[i][j], end=" ")
         print("")
 
-def check_matrix_shape(a: List[List[Int]], b: List[List[Int]]) -> Bool:
+def check_matrix_shape_equal(a: List[List[Int]], b: List[List[Int]]) -> Bool:
     if len(a) != len(b):
         print("Error: Matrices have different number of rows!")
         return False
@@ -17,8 +17,27 @@ def check_matrix_shape(a: List[List[Int]], b: List[List[Int]]) -> Bool:
             return False
     return True
 
+def check_matrix_shape_multiplicable(a: List[List[Int]], b: List[List[Int]]) -> Bool:
+    if len(a) == 0 or len(b) == 0:
+        print("Error: One or both matrices are empty!")
+        return False
+    # Check all rows in a have same length
+    for i in range(len(a)):
+        if len(a[i]) != len(a[0]):
+            print("Error: Matrix A has inconsistent row lengths!")
+            return False
+    # Check all rows in b have same length
+    for i in range(len(b)):
+        if len(b[i]) != len(b[0]):
+            print("Error: Matrix B has inconsistent row lengths!")
+            return False
+    if len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B!")
+        return False
+    return True
+
 def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
-    if not check_matrix_shape(a, b):
+    if not check_matrix_shape_equal(a, b):
         print("Aborting matrix addition due to shape mismatch.")
         return List[List[Int]]()
     result = List[List[Int]]()
@@ -30,22 +49,9 @@ def matrix_add(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
     return result
 
 def matrix_multiply(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
-    if len(a) == 0 or len(b) == 0:
-        print("Error: One or both matrices are empty!")
+    if not check_matrix_shape_multiplicable(a, b):
+        print("Aborting matrix multiplication due to shape mismatch or invalid shapes.")
         return List[List[Int]]()
-    if len(a[0]) != len(b):
-        print("Error: Number of columns of A does not match number of rows of B!")
-        return List[List[Int]]()
-    # Check all rows in a have same length
-    for i in range(len(a)):
-        if len(a[i]) != len(a[0]):
-            print("Error: Matrix A has inconsistent row lengths!")
-            return List[List[Int]]()
-    # Check all rows in b have same length
-    for i in range(len(b)):
-        if len(b[i]) != len(b[0]):
-            print("Error: Matrix B has inconsistent row lengths!")
-            return List[List[Int]]()
     result = List[List[Int]]()
     for i in range(len(a)):
         row = List[Int]()

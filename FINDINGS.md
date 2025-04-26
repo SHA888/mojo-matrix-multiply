@@ -122,4 +122,44 @@ def matrix_multiply(a: List[List[Int]], b: List[List[Int]]) -> List[List[Int]]:
 
 ---
 
-_Last updated: 2025-04-26 22:30 (UTC+8)_
+## 10. Modularizing Shape Checking
+
+- Extracted shape-checking logic into two dedicated functions:
+
+```python
+def check_matrix_shape_equal(a: List[List[Int]], b: List[List[Int]]) -> Bool:
+    if len(a) != len(b):
+        print("Error: Matrices have different number of rows!")
+        return False
+    for i in range(len(a)):
+        if len(a[i]) != len(b[i]):
+            print("Error: Row", i, "has different lengths in the two matrices!")
+            return False
+    return True
+
+def check_matrix_shape_multiplicable(a: List[List[Int]], b: List[List[Int]]) -> Bool:
+    if len(a) == 0 or len(b) == 0:
+        print("Error: One or both matrices are empty!")
+        return False
+    # Check all rows in a have same length
+    for i in range(len(a)):
+        if len(a[i]) != len(a[0]):
+            print("Error: Matrix A has inconsistent row lengths!")
+            return False
+    # Check all rows in b have same length
+    for i in range(len(b)):
+        if len(b[i]) != len(b[0]):
+            print("Error: Matrix B has inconsistent row lengths!")
+            return False
+    if len(a[0]) != len(b):
+        print("Error: Number of columns of A does not match number of rows of B!")
+        return False
+    return True
+```
+- `matrix_add` and `matrix_multiply` now use these helpers for shape validation.
+- This reduces code duplication, improves maintainability, and makes it easier to extend shape checks for new operations.
+- All error messages and behaviors are preserved and centralized.
+
+---
+
+_Last updated: 2025-04-26 22:35 (UTC+8)_
